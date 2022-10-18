@@ -1,19 +1,30 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { LayoutComponent } from './components/layout/layout.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { AuthService } from './services/auth.service';
+import { HttpService } from './services/http.service';
+
 
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    FooterComponent,
-    LayoutComponent
+      LoaderComponent
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[
+    LoaderComponent
+   ],
+   providers:[AuthService, HttpService]
 })
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders<SharedModule> {
+    return {
+      ngModule: SharedModule,
+       
+      providers: [AuthService, HttpService]
+    };
+  }
+ }
